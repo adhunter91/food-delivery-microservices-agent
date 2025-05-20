@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: fooddelivery
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: food_delivery
+    ports:
+      - "5432:5432" # Expose PostgreSQL on port 5432 - Standard practice
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - food-delivery-network
+
+  # Service containers will be added as they are developed
+
+networks:
+  food-delivery-network:
+    driver: bridge
+    # bridge network for communication between services
+    # and the PostgreSQL database
+
+volumes:
+  postgres_data:
+  # named volume for PostgreSQL data
+  # to persist data across container restarts
